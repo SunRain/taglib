@@ -307,13 +307,13 @@ set(tag_LIB_SRCS
   audioproperties.cpp
 )
 
-add_library(tag ${tag_LIB_SRCS} ${tag_HDRS})
+add_library(tag_mod ${tag_LIB_SRCS} ${tag_HDRS})
 
 if(ZLIB_FOUND)
-	target_link_libraries(tag ${ZLIB_LIBRARIES})
+	target_link_libraries(tag_mod ${ZLIB_LIBRARIES})
 endif()
 
-set_target_properties(tag PROPERTIES
+set_target_properties(tag_mod PROPERTIES
   VERSION ${TAGLIB_SOVERSION_MAJOR}.${TAGLIB_SOVERSION_MINOR}.${TAGLIB_SOVERSION_PATCH}
   SOVERSION ${TAGLIB_SOVERSION_MAJOR}
   INSTALL_NAME_DIR ${LIB_INSTALL_DIR}
@@ -322,10 +322,10 @@ set_target_properties(tag PROPERTIES
   PUBLIC_HEADER "${tag_HDRS}"
 )
 if(BUILD_FRAMEWORK)
-  set_target_properties(tag PROPERTIES FRAMEWORK TRUE)
+  set_target_properties(tag_mod PROPERTIES FRAMEWORK TRUE)
 endif()
 
-install(TARGETS tag
+install(TARGETS tag_mod
 	FRAMEWORK DESTINATION ${FRAMEWORK_INSTALL_DIR}
 	LIBRARY DESTINATION ${LIB_INSTALL_DIR}
 	RUNTIME DESTINATION ${BIN_INSTALL_DIR}

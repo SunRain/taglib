@@ -18,12 +18,12 @@ include_directories(
 
 set(tag_c_HDRS tag_c.h)
 
-add_library(tag_c tag_c.cpp ${tag_c_HDRS})
+add_library(tag_mod_c tag_c.cpp ${tag_c_HDRS})
 
-target_link_libraries(tag_c tag)
-set_target_properties(tag_c PROPERTIES PUBLIC_HEADER "${tag_c_HDRS}")
+target_link_libraries(tag_mod_c tag_mod)
+set_target_properties(tag_mod_c PROPERTIES PUBLIC_HEADER "${tag_c_HDRS}")
 if(BUILD_FRAMEWORK)
-  set_target_properties(tag_c PROPERTIES FRAMEWORK TRUE)
+  set_target_properties(tag_mod_c PROPERTIES FRAMEWORK TRUE)
 endif()
 
 # On Solaris we need to explicitly add the C++ standard and runtime
@@ -44,16 +44,16 @@ if(HAVE_CRUN_LIB)
   if(NOT ROGUEWAVE_STDCXX_LIBRARY)
     message(FATAL_ERROR "Did not find supported STL library (tried stdcxx4 and stdcxx)")
   endif()
-  target_link_libraries(tag_c ${ROGUEWAVE_STDCXX_LIBRARY} Crun)
+  target_link_libraries(tag_mod_c ${ROGUEWAVE_STDCXX_LIBRARY} Crun)
 endif()
 
-set_target_properties(tag_c PROPERTIES
+set_target_properties(tag_mod_c PROPERTIES
   VERSION 0.0.0
   SOVERSION 0
   DEFINE_SYMBOL MAKE_TAGLIB_C_LIB
   INSTALL_NAME_DIR ${LIB_INSTALL_DIR}
 )
-install(TARGETS tag_c
+install(TARGETS tag_mod_c
 	FRAMEWORK DESTINATION ${FRAMEWORK_INSTALL_DIR}
 	LIBRARY DESTINATION ${LIB_INSTALL_DIR}
 	RUNTIME DESTINATION ${BIN_INSTALL_DIR}
